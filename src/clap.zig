@@ -99,8 +99,8 @@ pub fn exportPlugins(
             _ = host;
             inline for (plugins) |Pl| {
                 if (std.mem.eql(u8, std.mem.span(Pl.descriptor.id), std.mem.span(plugin_id))) {
-                    var plug = std.heap.page_allocator.create(Plugin) catch @panic("OOM");
-                    var data = std.heap.page_allocator.create(Pl) catch @panic("OOM");
+                    const plug = std.heap.page_allocator.create(Plugin) catch @panic("OOM");
+                    const data = std.heap.page_allocator.create(Pl) catch @panic("OOM");
 
                     const stub = PluginStub(Pl);
                     plug.* = .{
